@@ -13,4 +13,6 @@ else:
 pdf = fitz.open(pdf_path)
 for page in pdf:
     text = page.get_text()
-    print(text)
+    with open("content.txt", "w") as file:
+        file.write(text)
+    
