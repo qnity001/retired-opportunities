@@ -1,4 +1,5 @@
 from pathlib import Path
+import fitz
 
 pdf_path = Path(input("Enter the path of pdf: "))
 if pdf_path.exists() and pdf_path.is_file():
@@ -8,3 +9,8 @@ if pdf_path.exists() and pdf_path.is_file():
 else:
     print("User input is invalid")
     exit()
+
+pdf = fitz.open(pdf_path)
+for page in pdf:
+    text = page.get_text()
+    print(text)
