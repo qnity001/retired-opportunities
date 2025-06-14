@@ -10,9 +10,12 @@ else:
     print("User input is invalid")
     exit()
 
+open("content.txt", "w").close()
+
 pdf = fitz.open(pdf_path)
 for page in pdf:
     text = page.get_text()
-    with open("content.txt", "w") as file:
+    if len(text) < 200:
+        print("Use OCR!")
+    with open("content.txt", "a", encoding="utf-8") as file:
         file.write(text)
-    
