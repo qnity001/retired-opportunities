@@ -3,24 +3,34 @@ import fitz
 import re
 import sys
 
+# Searchable pdf
 def extract_plain(pdf):
-    return chr(12).join([page.get_text(sort = True) for page in pdf])
-
-# Scanned text
-def extract_OCR(pdf):
     all_text = ""
     for page in pdf:
-        for item in page.get_images():
-            xref = item[0]
-            pix = fitz.Pixmap(pdf, xref)
-            pdfdata = pix.pdfocr_tobytes()
-            ocrpdf = fitz.open("pdf", pdfdata)
-            ocrtext = ocrpdf[0].get_text(sort = True)
-            all_text += ocrtext + chr(12)
-    return all_text
+        text = page.get_text(sort = True)
+        if check_garbage(text):
+            text = extract_OCR(pdf, page)
+        all_text += text + chr(12)
+
+# Scanned text
+def extract_OCR(pdf, page):
+    for item in page.get_images():
+        xref = item[0]
+        pix = fitz.Pixmap(pdf, xref)
+        pdfdata = pix.pdfocr_tobytes()
+        ocrpdf = fitz.open("pdf", pdfdata)
+        ocrtext = ocrpdf[0].get_text(sort = True)
+        return ocrtext
 
 def check_garbage(text: str):
-    return
+    if len(text) < 200:
+        return True
+    elif not text.isascii():
+        return True
+    elif check_alphanum(text) > 0.5:
+        return True
+    else:
+        return False
 
 def check_alphanum(text: str):
     total = len(text)
