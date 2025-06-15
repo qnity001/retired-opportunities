@@ -19,12 +19,10 @@ def check_alphanum(text: str):
         non_alpha = len(re.findall(r"[^a-zA-Z0-9\s]", text))
         return non_alpha / total
 
-open("content.txt", "w").close()
+def convert_to_image(page):
+    return
 
-pdf = fitz.open(pdf_path)
-for page in pdf:
-    text = page.get_text()
-    if len(text) < 200 or check_alphanum(text) > 0.5:
-        print("Use OCR!")
-    with open("content.txt", "a", encoding="utf-8") as file:
-        file.write(text)
+all_text = ""
+pdf = fitz. open(pdf_path)
+all_text = chr(12).join([page.get_text() for page in pdf])
+print(all_text)
