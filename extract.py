@@ -1,8 +1,8 @@
-from pathlib import Path
 import fitz
 import re
 import sys
 import urllib.request
+import tempfile
 
 # Searchable pdf
 def extract(pdf):
@@ -45,8 +45,8 @@ def check_alphanum(text: str):
 
 if __name__ == "__main__":
     pdf_url = sys.argv[1]
-    urllib.request.urlretrieve(pdf_url, "./temp/pdfs/recruitment.pdf")
-    pdf_path = "./temp/pdfs/recruitment.pdf"
-    pdf = fitz.open(pdf_path)
+    temp = tempfile.NamedTemporaryFile(dir = "./temp/pdfs/", suffix = ".pdf", delete = False)
+    urllib.request.urlretrieve(pdf_url, temp.name)
+    pdf = fitz.open(temp.name)
     with open("content.txt", "w", encoding="utf-8") as file:
         file.write(extract(pdf))
