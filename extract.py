@@ -3,6 +3,7 @@ import re
 import sys
 import urllib.request
 import tempfile
+import os
 
 # Searchable pdf
 def extract(pdf):
@@ -45,8 +46,13 @@ def check_alphanum(text: str):
 
 if __name__ == "__main__":
     pdf_url = sys.argv[1]
-    temp, path = tempfile.mkstemp(dir = "./temp/pdfs/", suffix = ".pdf")
+    fd, path = tempfile.mkstemp(dir = "./temp/pdfs/", suffix = ".pdf")
     urllib.request.urlretrieve(pdf_url, path)
+
+    os.close(fd)
     pdf = fitz.open(path)
     with open("content.txt", "w", encoding="utf-8") as file:
-        file.write(extract(pdf))    
+        file.write(extract(pdf))
+
+    pdf.close()
+    os.remove(path)
