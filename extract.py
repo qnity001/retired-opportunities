@@ -1,15 +1,7 @@
 from pathlib import Path
 import fitz
 import re
-
-pdf_path = Path(input("Enter the path of pdf: "))
-if pdf_path.exists() and pdf_path.is_file():
-    print("User input is correct")
-    print(pdf_path)
-
-else:
-    print("User input is invalid")
-    exit()
+import sys
 
 def check_alphanum(text: str):
     total = len(text)
@@ -20,10 +12,10 @@ def check_alphanum(text: str):
         return non_alpha / total
 
 all_text = ""
-pdf = fitz. open(pdf_path)
+pdf = fitz. open(sys.argv[1])
 
 # Searchable text
-all_text = chr(12).join([page.get_text(sort = True) for page in pdf])
+#all_text = chr(12).join([page.get_text(sort = True) for page in pdf])
 
 # Scanned text
 for page in pdf:
