@@ -19,10 +19,20 @@ def check_alphanum(text: str):
         non_alpha = len(re.findall(r"[^a-zA-Z0-9\s]", text))
         return non_alpha / total
 
-def convert_to_image(page):
-    return
-
 all_text = ""
 pdf = fitz. open(pdf_path)
-all_text = chr(12).join([page.get_text() for page in pdf])
+
+# Searchable text
+all_text = chr(12).join([page.get_text(sort = True) for page in pdf])
+
+# Scanned text
+for page in pdf:
+    for item in page.get_images():
+        xref = item[0]
+        pix = fitz.Pixmap(pdf, xref)
+        pdfdata = pix.pdfocr_tobytes()
+        ocrpdf = fitz.open("pdf", pdfdata)
+        ocrtext = ocrpdf[0].get_text(sort = True)
+        all_text += ocrtext + chr(12)
+
 print(all_text)
