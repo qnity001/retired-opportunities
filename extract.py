@@ -46,13 +46,12 @@ def check_alphanum(text: str):
 
 if __name__ == "__main__":
     pdf_url = sys.argv[1]
-    fd, path = tempfile.mkstemp(dir = "./temp/pdfs/", suffix = ".pdf")
-    urllib.request.urlretrieve(pdf_url, path)
+    with tempfile.NamedTemporaryFile(dir = "./temp/pdfs/", suffix = ".pdf", delete = False) as temp:
+        urllib.request.urlretrieve(pdf_url, temp.name)
 
-    os.close(fd)
-    pdf = fitz.open(path)
+    pdf = fitz.open(temp.name)
     with open("content.txt", "w", encoding="utf-8") as file:
         file.write(extract(pdf))
 
     pdf.close()
-    os.remove(path)
+    os.remove(temp.name)
