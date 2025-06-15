@@ -44,4 +44,5 @@ def check_alphanum(text: str):
 
 if __name__ == "__main__":
     pdf = fitz.open(sys.argv[1])
-    print(extract(pdf))
+    with open("content.txt", "w") as file:
+        file.write(extract(pdf))
