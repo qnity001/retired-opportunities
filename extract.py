@@ -11,20 +11,23 @@ def check_alphanum(text: str):
         non_alpha = len(re.findall(r"[^a-zA-Z0-9\s]", text))
         return non_alpha / total
 
-all_text = ""
-pdf = fitz. open(sys.argv[1])
-
-# Searchable text
-#all_text = chr(12).join([page.get_text(sort = True) for page in pdf])
+def extract_plain(pdf):
+    return chr(12).join([page.get_text(sort = True) for page in pdf])
 
 # Scanned text
-for page in pdf:
-    for item in page.get_images():
-        xref = item[0]
-        pix = fitz.Pixmap(pdf, xref)
-        pdfdata = pix.pdfocr_tobytes()
-        ocrpdf = fitz.open("pdf", pdfdata)
-        ocrtext = ocrpdf[0].get_text(sort = True)
-        all_text += ocrtext + chr(12)
+def extract_OCR(pdf):
+    all_text = ""
+    for page in pdf:
+        for item in page.get_images():
+            xref = item[0]
+            pix = fitz.Pixmap(pdf, xref)
+            pdfdata = pix.pdfocr_tobytes()
+            ocrpdf = fitz.open("pdf", pdfdata)
+            ocrtext = ocrpdf[0].get_text(sort = True)
+            all_text += ocrtext + chr(12)
+    return all_text
 
-print(all_text)
+if __name__ == "__main__":
+    pdf = fitz.open(sys.argv[1])
+    all_text = extract_OCR(pdf)
+    print(all_text)
