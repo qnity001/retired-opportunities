@@ -44,14 +44,15 @@ def check_alphanum(text: str):
         non_alpha = len(re.findall(r"[^a-zA-Z0-9\s]", text))
         return non_alpha / total
 
-if __name__ == "__main__":
-    pdf_url = sys.argv[1]
+def get_content(pdf_url):
     with tempfile.NamedTemporaryFile(dir = "./temp/pdfs/", suffix = ".pdf", delete = False) as temp:
         urllib.request.urlretrieve(pdf_url, temp.name)
 
     pdf = fitz.open(temp.name)
     with open("content.txt", "w", encoding="utf-8") as file:
-        file.write(extract(pdf))
+        content = extract(pdf)
 
     pdf.close()
     os.remove(temp.name)
+
+    return content
