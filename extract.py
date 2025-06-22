@@ -46,14 +46,24 @@ def check_alphanum(text: str):
 
 def get_content(pdf_url):
     with tempfile.NamedTemporaryFile(dir = "./temp/pdfs/", suffix = ".pdf", delete = False) as temp:
-        urllib.request.urlretrieve(pdf_url, temp.name)
+        try:
+            urllib.request.urlretrieve(pdf_url, temp.name)
+        except:
+            return ""
 
-    pdf = fitz.open(temp.name)
-    if len(pdf) > 15:
+    try:
+        pdf = fitz.open(temp.name)
+    except:
+        pdf.close()
+        os.remove(temp.name)
         return ""
+    
+    if len(pdf) > 15:
+        pdf.close()
+        os.remove(temp.name)
+        return ""
+    
     content = extract(pdf)
-
     pdf.close()
-    os.remove(temp.name)
-
+    os.remove(temp.name)    
     return content
