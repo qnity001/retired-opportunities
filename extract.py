@@ -49,8 +49,9 @@ def get_content(pdf_url):
         urllib.request.urlretrieve(pdf_url, temp.name)
 
     pdf = fitz.open(temp.name)
-    with open("content.txt", "w", encoding="utf-8") as file:
-        content = extract(pdf)
+    if len(pdf) > 15:
+        return ""
+    content = extract(pdf)
 
     pdf.close()
     os.remove(temp.name)
