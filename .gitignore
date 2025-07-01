@@ -1,5 +1,4 @@
 .iit-ropar/
-content.txt
 temp/
 __pycache__/
 results.jsonl
