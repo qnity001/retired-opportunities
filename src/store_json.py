@@ -1,6 +1,6 @@
 from src.scraper import get_links
 from src.extract import get_content
-#from summary_llm import summarize, get_metadata
+from summary_llm import summarize, get_metadata
 import json
 import re
 
@@ -21,11 +21,10 @@ def run():
         content = remove_extra_spaces(content)
 
         # Send the content to ollama for summary
-        #content = summarize(content)
-        #metadata = get_metadata(content)
-        #print(metadata)
+        content = summarize(content)
+        metadata = get_metadata(content)
+        print(metadata)
 
-        #'''
         # Save the information in jsonl
         output = {
             "url" : link,
@@ -33,4 +32,3 @@ def run():
         }
         with open("results.jsonl", "a", encoding="utf-8") as file:
             file.write(json.dumps(output, ensure_ascii = False) + "\n")
-    #'''
