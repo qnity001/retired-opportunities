@@ -2,7 +2,7 @@ import ollama
 import re
 import json
 
-with open("../content.txt", "r") as file:
+with open("../content.txt", "r",  encoding="utf-8", errors="ignore") as file:
     content = file.read()
     content = re.sub(r'\n\s*\n+', '\n\n', content)
     content = re.sub(r'[ \t]+', ' ', content) 

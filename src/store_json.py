@@ -1,6 +1,6 @@
 from src.scraper import get_links
 from src.extract import get_content
-from summary_llm import summarize, get_metadata
+from src.summary_llm import summarize, get_metadata
 import json
 import re
 
@@ -30,5 +30,5 @@ def run():
             "url" : link,
             "content": content
         }
-        with open("results.jsonl", "a", encoding="utf-8") as file:
+        with open("results.jsonl", "a", encoding="utf-8", errors = "ignore") as file:
             file.write(json.dumps(output, ensure_ascii = False) + "\n")
