@@ -61,7 +61,9 @@ def clean_pdf(text):
     return text
 
 def get_content(pdf_url):
-    with tempfile.NamedTemporaryFile(dir = "../temp/pdfs/", suffix = ".pdf", delete = False) as temp:
+    dir = "temp/pdfs"
+    os.makedirs(dir, exist_ok = True)
+    with tempfile.NamedTemporaryFile(dir = "temp/pdfs/", suffix = ".pdf", delete = False) as temp:
         try:
             urllib.request.urlretrieve(pdf_url, temp.name)
         except:

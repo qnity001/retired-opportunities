@@ -3,3 +3,4 @@ content.txt
 temp/
 __pycache__/
 results.jsonl
+.env
