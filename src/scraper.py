@@ -43,7 +43,6 @@ def direct_links(url):
             continue
 
         link_text = link.text.strip().lower()
-        print(link_text)
         if keyword_check(link_text):
             links.append(full_link)
         
