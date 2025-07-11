@@ -1,18 +1,38 @@
-@import url('https://fonts.googleapis.com/css?family=Playfair+Display|Roboto&display=swap');
+/* Main HTML Declarations */
+
+@import url('https://fonts.googleapis.com/css?family=Playfair+Display|Lato&display=swap');
 
 body {
     background-color: #F0EDEE;
     font-size: 24px;
-    font-family: Roboto, sans-serif;
+    font-family: Lato, sans-serif;
+    color: #333;
 }
 
 main {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    max-width: 1200px;
     min-height: 100vh;
+    line-height: 1.4;
 }
+
+button {
+    font-weight: bold;
+    box-sizing: border-box;
+    cursor: pointer;
+    font-size: 24px;
+    color: #F0EDEE;
+}
+
+button.normal {
+    background: none;
+	color: inherit;
+	border: none;
+	padding: 0;
+	outline: inherit;
+}
+
+/* Header and footer declarations */
 
 header, footer {
     display: flex;
@@ -30,8 +50,8 @@ header {
 
 .logo {
     font-family:'Playfair Display', sans-serif;
-    font-weight: bold;
     font-size: 32px;
+    letter-spacing: 0.04rem;
 }
 
 nav {
@@ -40,16 +60,57 @@ nav {
     min-width: 40vw;
 }
 
-.menu {
-    font-size: 24px;
-    font-weight: bold;
+.menu:hover {
+    text-decoration: underline;
+    text-underline-offset: 8px;
 }
 
-button.normal {
-    background: none;
-	color: inherit;
-	border: none;
-	padding: 0;
-	cursor: pointer;
-	outline: inherit;
+/* CSS for Hero Section */
+
+.hero {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 80vh;
+    background: linear-gradient(#eaf3f9, #e0edf4);
+}
+
+.main-text {
+    font-size: 56px;
+    max-width: 80vw;
+    text-align: center;
+    margin: 0;
+}
+
+.subtext {
+    margin: 10px 96px 0px;
+    text-align: center;
+    font-size: 24px;
+    max-width: 40vw;
+    font-weight: bold;
+    color: #5a6473;
+}
+
+
+.cta {
+    background-color: #223D6A;
+    padding: 12px 30px;
+    width: 240px;
+    font: white;
+    border-radius: 3.40282e+38px;
+    margin-top: 50px;
+    box-shadow: 1px 1px 6px #264272;
+}
+
+
+/* MEDIA QUERIES */
+
+@media (max-width: 640px) {
+    .main-text {
+        font-size: 32px;
+    }
+    .subtext {
+        font-size: 18px;
+    }
 }
