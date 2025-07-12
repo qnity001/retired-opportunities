@@ -108,13 +108,20 @@ nav {
 .filters {
     display: flex;
     flex-direction: column;
+    justify-content: space-around;
     align-items: center;
-    min-height: 90vh;
+    min-height: 100vh;
+    font-weight: bold;
 }
 
 .section-heading {
-    margin: 50px 0px;
     text-align: center;
+}
+
+.main-container {
+    display: flex;
+    justify-content: center;
+    gap: 10vw;
 }
 
 .grid {
@@ -135,11 +142,6 @@ nav {
     text-align: center;
     color: inherit;
     padding: 12px;
-}
-
-.box > img {
-    height: 60px;
-    padding: 10px;
 }
 
 .icon {
@@ -170,10 +172,16 @@ nav {
     }    
 }
 
-@media (max-width: 900px) {
+@media (max-width: 1024px) {
+    .main-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-evenly;
+    }
+
     .grid {
-        min-width: 56vw;
-        grid-template: 20vw 20vw 20vw / 20vw 20vw 20vw;
+        width: 50vw;
+        grid-template: 16vw 16vw 16vw / 16vw 16vw 16vw;
         gap: 0.5vw;
     }
 }
