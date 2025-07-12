@@ -37,7 +37,7 @@ button.normal {
 header, footer {
     display: flex;
     background-color: #223D6A;
-    color: #F0EDEE;
+    color: whitesmoke;
     height: 10vh;
     display: flex;
     justify-content: center;
@@ -97,11 +97,66 @@ nav {
     background-color: #223D6A;
     padding: 12px 30px;
     width: 240px;
-    font: white;
+    font: whitesmoke;
     border-radius: 3.40282e+38px;
     margin-top: 50px;
     box-shadow: 1px 1px 6px #264272;
 }
+
+/*  CSS for Personalised Jobs Section */
+
+.filters {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 90vh;
+}
+
+.section-heading {
+    margin: 50px 0px;
+    text-align: center;
+}
+
+.grid {
+    overflow: auto;
+    display: grid;
+    width: 31vw;
+    grid-template: 10vw 10vw 10vw / 10vw 10vw 10vw;
+    gap: 0.2vw;
+}
+
+.box {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    background: whitesmoke;
+    text-align: center;
+    color: inherit;
+    padding: 12px;
+}
+
+.box > img {
+    height: 60px;
+    padding: 10px;
+}
+
+.icon {
+    padding: 10px;
+}
+
+.box > p {
+    margin: 0px;
+    font-size: 1rem;
+}
+
+.box:hover {
+    color: #f5f5f5;
+    background-color: #223D6A;
+    transition: 0.5s;
+}
+
 
 
 /* MEDIA QUERIES */
@@ -112,5 +167,13 @@ nav {
     }
     .subtext {
         font-size: 18px;
+    }    
+}
+
+@media (max-width: 900px) {
+    .grid {
+        min-width: 56vw;
+        grid-template: 20vw 20vw 20vw / 20vw 20vw 20vw;
+        gap: 0.5vw;
     }
 }
