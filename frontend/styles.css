@@ -65,6 +65,10 @@ nav {
     text-underline-offset: 8px;
 }
 
+.hidden-navbar {
+    display: none;
+}
+
 /* CSS for Hero Section */
 
 .hero {
@@ -91,7 +95,6 @@ nav {
     font-weight: bold;
     color: #5a6473;
 }
-
 
 .cta {
     background-color: #223D6A;
@@ -239,6 +242,27 @@ h4 {
 }
 
 @media (max-width: 1024px) {
+
+    .hidden-navbar {
+        display: block;
+    }
+
+    .normal-navbar {
+        display: none;
+    }
+
+    header {
+        justify-content: space-between;
+    }
+
+    .logo, .hidden-navbar  {
+        margin: 1rem;
+    }
+
+    .mobile-navbar {
+        display: none;
+    }
+
     .main-container {
         display: flex;
         flex-wrap: wrap;
@@ -259,7 +283,7 @@ h4 {
     }
 
     .blog-card {
-        min-width: 50vw;
+        min-width: 70vw;
     }
     
 }
