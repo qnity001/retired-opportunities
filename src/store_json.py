@@ -1,10 +1,8 @@
 from src.scraper import get_links
 from src.extract import get_content
-from src.summary_llm import summarize, get_metadata
+from src.summary_llm_api import summarize
 import json
 import re
-
-open("results.jsonl", "w").close()
 
 def remove_extra_spaces(content: str):
     text = re.sub(r'\n\s*\n+', '\n\n', content)
@@ -12,6 +10,7 @@ def remove_extra_spaces(content: str):
     return text
 
 def run():
+    output = {}
     links = get_links()
     for link in links:
         print(link)
@@ -22,13 +21,12 @@ def run():
 
         # Send the content to ollama for summary
         content = summarize(content)
-        metadata = get_metadata(content)
-        print(metadata)
+        #metadata = get_metadata(content)
+        #print(metadata)
 
-        # Save the information in jsonl
-        output = {
-            "url" : link,
-            "content": content
-        }
-        with open("results.jsonl", "a", encoding="utf-8", errors = "ignore") as file:
-            file.write(json.dumps(output, ensure_ascii = False) + "\n")
+        # Save the information in dictionary
+        output[link] = content
+
+    with open("retired_backend/summaries/data/summary_data.json", "w") as file:
+        file.write(json.dumps(output, indent=4))
+    print("Stored the contents in results.json")
